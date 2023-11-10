@@ -1,5 +1,5 @@
 from networkx import barabasi_albert_graph, Graph
-from random import choice
+from random import choice, uniform
 from itertools import pairwise
 
 NEW_NODE_EDGES = 3
@@ -24,9 +24,14 @@ def random_path(graph: Graph, max_len):
     return path
 
 BUS_LINE_KEY = "bus_line"
+EDGE_LENGTH_LIMITS = (10, 100)
 
 def generate_city_graph(nodes=100, bus_lines=10):
-    graph = barabasi_albert_graph(nodes, NEW_NODE_EDGES)
+    graph: Graph = barabasi_albert_graph(nodes, NEW_NODE_EDGES)
+
+    for edge in graph.edges():
+        graph[edge[0]][edge[1]]["length"] = uniform(*EDGE_LENGTH_LIMITS)
+
     for bus_line in range(bus_lines):
         for i, j in pairwise(random_path(graph, BUS_STOPS)):
             edge = graph[i][j]
