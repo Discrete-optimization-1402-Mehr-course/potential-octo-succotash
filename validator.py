@@ -1,7 +1,9 @@
-from typing import Callable, Any, Dict
-from itertools import pairwise
-from networkx.classes.multidigraph import MultiDiGraph
 from dataclasses import dataclass
+from itertools import pairwise
+from typing import Any, Callable, Dict
+
+from networkx.classes.multidigraph import MultiDiGraph
+
 
 @dataclass
 class Problem:
